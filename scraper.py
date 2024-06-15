@@ -4,7 +4,7 @@ import psycopg2
 from urllib.parse import urljoin
 
 # Replace with your actual PostgreSQL connection details from Vercel
-DATABASE_URL = "postgres://yourusername:yourpassword@yourhost:yourport/yourdatabase"
+DATABASE_URL = "postgresql://neondb_owner:zwM1N0HrbTVA@ep-winter-truth-a24l7wjg-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require"
 
 def get_db_connection():
     return psycopg2.connect(DATABASE_URL)

@@ -9,6 +9,9 @@ export async function GET() {
   try {
     const result = await client.query('SELECT * FROM articles');
     return new Response(JSON.stringify(result.rows), { status: 200 });
+  } catch (error) {
+    console.error('Error executing query', error);
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   } finally {
     client.release();
   }
@@ -20,6 +23,9 @@ export async function DELETE(req) {
   try {
     await client.query('DELETE FROM articles WHERE id = $1', [id]);
     return new Response(JSON.stringify({ message: 'Article deleted' }), { status: 200 });
+  } catch (error) {
+    console.error('Error executing query', error);
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   } finally {
     client.release();
   }
