@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    env: {
-      DATABASE_URL: process.env.DATABASE_URL,
-    },
-  };
-  
-  export default nextConfig;
-  
+  reactStrictMode: true,
+  swcMinify: true,
+  env: {
+    DATABASE_URL: process.env.DATABASE_URL,
+  },
+};
+
+export default nextConfig;
