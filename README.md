@@ -23,7 +23,7 @@ Ensure you have PostgreSQL installed and running. Create a new database for this
 
 Create a `.env.local` file in the `bbc-scraper-frontend` directory with the following content:
 
-DATABASE_URL="postgresql://neondb_owner:zwM1N0HrbTVA@ep-winter-truth-a24l7wjg-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require"
+DATABASE_URL= ""
 
 ### Install Required Packages
 Python
@@ -54,9 +54,6 @@ Each article has a "Delete" button that allows you to remove the article from th
 You can use the following query to check if the articles are present in the database:
 SELECT * FROM public.articles
 ORDER BY id ASC;
-
-
-
 
 ### Troubleshooting
 Ensure the PostgreSQL database is running and accessible.
