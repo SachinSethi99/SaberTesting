@@ -1,23 +1,28 @@
-"use client";
+"use client"; // Ensures that this file is treated as a client-side component
 
+// Importing necessary hooks and libraries
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function Home() {
+  // State to store articles fetched from the database
   const [articles, setArticles] = useState([]);
 
+  // useEffect hook to fetch articles when the component mounts
   useEffect(() => {
     fetchArticles();
   }, []);
 
+  // Function to fetch articles from the API
   const fetchArticles = async () => {
     const res = await axios.get('/api/articles');
     setArticles(res.data);
   };
 
+  // Function to delete an article by its id
   const deleteArticle = async (id) => {
     await axios.delete(`/api/articles?id=${id}`);
-    fetchArticles();
+    fetchArticles(); // Fetch articles again to update the list after deletion
   };
 
   return (

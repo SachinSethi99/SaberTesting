@@ -10,16 +10,18 @@ import logging
 # Load environment variables from .env.local file
 load_dotenv('.env.local')
 
-# Configure logging
+# Configure logging to display info level messages
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Retrieve PostgreSQL connection details from environment variables
 DATABASE_URL = os.getenv("DATABASE_URL")
 
+# Function to establish a connection to the PostgreSQL database
 def get_db_connection():
     return psycopg2.connect(DATABASE_URL)
 
+# Function to create the articles table in the database, drops the table if it already exists
 def create_table():
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -36,6 +38,7 @@ def create_table():
     cursor.close()
     conn.close()
 
+# Asynchronous function to fetch HTML content from a URL
 async def fetch(session, url):
     try:
         async with session.get(url) as response:
@@ -45,6 +48,7 @@ async def fetch(session, url):
         logger.error(f"Error fetching {url}: {e}")
         return None
 
+# Asynchronous function to scrape BBC articles, with a maximum limit on the number of articles
 async def scrape_bbc(max_articles=1000):
     base_url = 'https://www.bbc.com'
     visited_urls = set()
@@ -101,6 +105,7 @@ async def scrape_bbc(max_articles=1000):
     save_articles(articles)
     logger.info("Web scraping complete. Articles saved to database.")
 
+# Function to save the list of articles to the database
 def save_articles(articles):
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -113,6 +118,7 @@ def save_articles(articles):
     cursor.close()
     conn.close()
 
+# Main entry point of the script
 if __name__ == '__main__':
     create_table()
     asyncio.run(scrape_bbc())
