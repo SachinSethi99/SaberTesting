@@ -28,32 +28,35 @@ DATABASE_URL="postgresql://neondb_owner:zwM1N0HrbTVA@ep-winter-truth-a24l7wjg-po
 ### Install Required Packages
 Python
 Navigate to the project root directory and install the required packages:
-
 pip install requests beautifulsoup4 psycopg2-binary aiohttp tqdm
 
-Run the Scraper
+## Run the Scraper
 Navigate to the bbc-scraper-frontend directory and run the scraper script to populate the database:
-
 cd bbc-scraper-frontend
 python scraper.py
-Next.js Frontend
 
+## Next.js Frontend
 ### Install Dependencies
 Navigate to the bbc-scraper-frontend directory:
-
 cd bbc-scraper-frontend
 ### Install the necessary Node.js packages:
-
 yarn install
 Start Development Server
 Run the development server:
-
 yarn dev
 Open your browser and navigate to http://localhost:3000 to view the application.
 
 ### Usage
 The homepage will display a list of scraped articles.
 Each article has a "Delete" button that allows you to remove the article from the database.
+
+### Verify the Database
+You can use the following query to check if the articles are present in the database:
+SELECT * FROM public.articles
+ORDER BY id ASC;
+
+
+
 
 ### Troubleshooting
 Ensure the PostgreSQL database is running and accessible.
